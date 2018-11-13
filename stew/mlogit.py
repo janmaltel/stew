@@ -88,7 +88,7 @@ class StewMultinomialLogit:
             weights[lam_ix, :] = self.fit(data=standardized_data, start_weights=self.start_weights, lam=lambda_ix, standardize=False)
             if np.std(weights[lam_ix, :]) < 0.0001:
                 if self.verbose:
-                    print("Converged at lambda: ", lambda_ix, ". Index ", lam_ix, " out of ", self.num_lambdas, "lambdas.")
+                    print("Converged at index ", lam_ix, " out of ", self.num_lambdas, "lambdas.")  # lambda: ", lambda_ix, ".
                     # print("Weights are: ", weights[lam_ix, :])
                 stop_index = lam_ix + 1
                 converged = True
@@ -110,9 +110,9 @@ class StewMultinomialLogit:
             weights = weights[:stop_index]
         cv_min_ix = stew.utils.last_argmin(lam_errors)
         cv_min_lambda = self.lambdas[cv_min_ix]
-        # if self.verbose:
-        #     print("Lambda min is: ", cv_min_lambda, ". Index ", cv_min_ix, " out of ", self.num_lambdas, "lambdas.")
-        #     print("Weights are: ", weights[cv_min_ix, :])
+        if self.verbose:
+            print("Lambda min index ", cv_min_ix, " out of ", self.num_lambdas, "lambdas.")  # is: ", cv_min_lambda, ". I
+            # print("Weights are: ", weights[cv_min_ix, :])
         cv_min_weights = weights[cv_min_ix]
         # print(cv_min_lambda)
         # if self.verbose:
