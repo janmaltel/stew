@@ -30,11 +30,32 @@ class StewMultinomialLogit:
             standardized_data[:, 2:] /= stds_before_standardization
         else:
             standardized_data = data
+
         if start_weights is None:
             start_weights = self.start_weights
+
+        # For OLS, only estimate c-1 parameters, where c is the number of choice sets.
+        deleted_features = False
+        if lam == 0:
+            # Sum up choices to know how many choice sets there are.
+            num_of_choice_sets = np.sum(standardized_data[:, 1])
+            print("num_of_choice_sets: ", num_of_choice_sets)
+            num_of_parameters = standardized_data.shape[1] - 2
+            diff = num_of_parameters - num_of_choice_sets
+            if diff >= 0:
+                deleted_features = True
+                # Only keep num_of_choice_sets - 1 predictors (+2 columns for choice set indicator and choice)
+                standardized_data = standardized_data[:, :int(num_of_choice_sets + 1)]
+                start_weights = start_weights[:int(num_of_choice_sets - 1)]
+
         op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
                             args=(standardized_data, self.D, lam), jac=True, method=self.method)
         weights = op.x
+        if deleted_features:
+            tmp_weights = np.zeros(num_of_parameters)
+            tmp_weights[:len(weights)] = weights
+            weights = tmp_weights
+
         if standardize:
             print("before re_standardizing weights")
             print(weights)
@@ -87,9 +108,9 @@ class StewMultinomialLogit:
             # TODO: Put weight calculation outside of loop (only for lambda_min!!)
             weights[lam_ix, :] = self.fit(data=standardized_data, start_weights=self.start_weights, lam=lambda_ix, standardize=False)
             if np.std(weights[lam_ix, :]) < 0.0001:
-                if self.verbose:
-                    print("Converged at index ", lam_ix, " out of ", self.num_lambdas, "lambdas.")  # lambda: ", lambda_ix, ".
-                    # print("Weights are: ", weights[lam_ix, :])
+                # if self.verbose:
+                #     print("Converged at index ", lam_ix, " out of ", self.num_lambdas, "lambdas.")  # lambda: ", lambda_ix, ".
+                #     # print("Weights are: ", weights[lam_ix, :])
                 stop_index = lam_ix + 1
                 converged = True
             lam_ix += 1

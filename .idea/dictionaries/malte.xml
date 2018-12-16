@@ -3,6 +3,7 @@
     <words>
       <w>bfgs</w>
       <w>logit</w>
+      <w>mlogit</w>
       <w>multinomial</w>
       <w>probs</w>
       <w>stds</w>
