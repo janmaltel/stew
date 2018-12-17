@@ -6,7 +6,7 @@ from sklearn.model_selection import GroupKFold
 
 
 class StewMultinomialLogit:
-    def __init__(self, num_features, lambda_min=-6.0, lambda_max=4.0, D=None, method="BFGS", max_splits=10, num_lambdas=40,
+    def __init__(self, num_features, lambda_min=-6.0, lambda_max=4.0, alpha=0.1, D=None, method="BFGS", max_splits=10, num_lambdas=40,
                  prior_weights=None, verbose=True):
         if D is None:
             self.D = stew.utils.create_diff_matrix(num_features=num_features)
@@ -21,6 +21,7 @@ class StewMultinomialLogit:
         self.lambda_max = lambda_max
         self.lambdas = np.insert(np.logspace(self.lambda_min, self.lambda_max, num=self.num_lambdas-1), 0, 0.0)
         self.verbose = verbose
+        self.alpha = alpha
 
     def fit(self, data, lam, start_weights=None, standardize=False):
         if standardize:
@@ -76,6 +77,9 @@ class StewMultinomialLogit:
             raise ValueError("Please provide weights!")
             # weights = self.weights
         return stew_multinomial_logit_predicted_probabilities(new_data, weights)
+
+    def sgd_update(self, data):
+        self.start_weights += self.alpha * single_choice_set_grad(self.start_weights, data)
 
     def cv_fit(self, data, standardize=False):
         if standardize:
@@ -184,6 +188,18 @@ def stew_multinomial_logit_predicted_probabilities(new_data, weights):
 
 
 @njit
+def single_choice_set_grad(beta, data):
+    grad = np.zeros(data.shape[1] - 2, dtype=np.float_)
+    utilities = data[:, 2:].dot(beta)
+    utilities = utilities-np.max(utilities)
+    exp_utilities = np.exp(utilities)
+    normalization_sum = np.sum(exp_utilities)
+    grad += np.sum((data[:, 1] - exp_utilities / normalization_sum).reshape((-1, 1))
+                   * data[:, 2:], axis=0)
+    return grad
+
+
+@njit
 def stew_multinomial_logit_ll_and_grad(beta, data, D, lam):
     ll = 0.0
     grad = np.zeros(data.shape[1] - 2, dtype=np.float_)
@@ -216,7 +232,5 @@ def stew_multinomial_logit_ll_and_grad(beta, data, D, lam):
         ll -= lam * beta.T.dot(D).dot(beta)
         grad -= 2 * lam * beta.dot(D)
     return -ll, -grad
-
-
 
 

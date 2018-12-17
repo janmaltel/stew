@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81ef93ec-3842-4c53-a0fb-e5e734e2c326" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/malte.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/malte.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stew/mlogit.py" beforeDir="false" afterPath="$PROJECT_DIR$/stew/mlogit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,24 +16,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+            <state relative-caret-position="76">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1542978788577" expanded="true" signature="167:8901" ph="..." />
+                <marker date="1545002642306" expanded="true" signature="167:9064" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stew/mlogit_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="213">
+              <caret line="14" column="47" lean-forward="true" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -93,6 +91,8 @@
       <find>self.verbose</find>
       <find>num_of_choice_sets</find>
       <find>diff</find>
+      <find>D</find>
+      <find>beta</find>
     </findStrings>
     <replaceStrings>
       <replace>num_</replace>
@@ -111,8 +111,8 @@
         <option value="$PROJECT_DIR$/stew/example_data.py" />
         <option value="$PROJECT_DIR$/stew/main.py" />
         <option value="$PROJECT_DIR$/stew/utils.py" />
-        <option value="$PROJECT_DIR$/stew/mlogit.py" />
         <option value="$PROJECT_DIR$/stew/mlogit_data.py" />
+        <option value="$PROJECT_DIR$/stew/mlogit.py" />
       </list>
     </option>
   </component>
@@ -250,18 +250,18 @@
       <workItem from="1544019898713" duration="4032000" />
       <workItem from="1544403045050" duration="3028000" />
       <workItem from="1544699470019" duration="2236000" />
-      <workItem from="1544974270543" duration="662000" />
+      <workItem from="1544974270543" duration="5325000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9958000" />
+    <option name="totallyTimeSpent" value="14621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1509299" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1509299" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -275,7 +275,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19617835" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19617835" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32356688" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -375,21 +375,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
+    <entry file="file://$PROJECT_DIR$/stew/mlogit_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <marker date="1542978788577" expanded="true" signature="167:8901" ph="..." />
-          </folding>
+        <state relative-caret-position="213">
+          <caret line="14" column="47" lean-forward="true" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stew/mlogit_data.py">
+    <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="76">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1545002642306" expanded="true" signature="167:9064" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
