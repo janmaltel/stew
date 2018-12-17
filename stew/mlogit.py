@@ -78,8 +78,9 @@ class StewMultinomialLogit:
             # weights = self.weights
         return stew_multinomial_logit_predicted_probabilities(new_data, weights)
 
-    def sgd_update(self, data):
-        self.start_weights += self.alpha * single_choice_set_grad(self.start_weights, data)
+    def sgd_update(self, weights, data):
+        new_weights = weights + self.alpha * single_choice_set_grad(weights, data)
+        return new_weights
 
     def cv_fit(self, data, standardize=False):
         if standardize:
