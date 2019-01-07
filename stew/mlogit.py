@@ -6,10 +6,13 @@ from sklearn.model_selection import GroupKFold
 
 
 class StewMultinomialLogit:
-    def __init__(self, num_features, lambda_min=-6.0, lambda_max=4.0, alpha=0.1, D=None, method="BFGS", max_splits=10, num_lambdas=40,
+    def __init__(self, num_features, lambda_min=-6.0, lambda_max=4.0, alpha=0.1,
+                 D=None, method="BFGS", max_splits=10, num_lambdas=40,
                  prior_weights=None, verbose=True):
         if D is None:
             self.D = stew.utils.create_diff_matrix(num_features=num_features)
+        else:
+            self.D = D
         self.method = method
         if prior_weights is None:
             self.start_weights = np.random.normal(loc=0, scale=0.1, size=num_features)

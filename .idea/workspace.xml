@@ -19,11 +19,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="45" column="25" lean-forward="true" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+            <state relative-caret-position="236">
+              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1546884489433" expanded="true" signature="167:9093" ph="..." />
+                <marker date="1546885947549" expanded="true" signature="167:9147" ph="..." />
               </folding>
             </state>
           </provider>
@@ -265,12 +265,12 @@
       <workItem from="1546213151386" duration="1785000" />
       <workItem from="1546603732016" duration="1184000" />
       <workItem from="1546801187333" duration="356000" />
-      <workItem from="1546861336140" duration="1757000" />
+      <workItem from="1546861336140" duration="2465000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25684000" />
+    <option name="totallyTimeSpent" value="26392000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -399,11 +399,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="45" column="25" lean-forward="true" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+        <state relative-caret-position="236">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1546884489433" expanded="true" signature="167:9093" ph="..." />
+            <marker date="1546885947549" expanded="true" signature="167:9147" ph="..." />
           </folding>
         </state>
       </provider>
