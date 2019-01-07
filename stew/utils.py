@@ -11,6 +11,12 @@ def create_diff_matrix(num_features):
 
 
 @njit
+def create_ridge_matrix(num_features):
+    D = np.eye(num_features)
+    return D
+
+
+@njit
 def multi_class_error(predicted_choices, true_choices, num_choices=None):
     if num_choices is None:
         num_choices = np.sum(true_choices)
