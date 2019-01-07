@@ -40,7 +40,7 @@ class StewMultinomialLogit:
         if lam == 0:
             # Sum up choices to know how many choice sets there are.
             num_of_choice_sets = np.sum(standardized_data[:, 1])
-            print("num_of_choice_sets: ", num_of_choice_sets)
+            # print("num_of_choice_sets: ", num_of_choice_sets)
             num_of_parameters = standardized_data.shape[1] - 2
             diff = num_of_parameters - num_of_choice_sets
             if diff >= 0:

@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81ef93ec-3842-4c53-a0fb-e5e734e2c326" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stew/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/stew/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stew/mlogit.py" beforeDir="false" afterPath="$PROJECT_DIR$/stew/mlogit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,11 +19,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+            <state relative-caret-position="365">
+              <caret line="45" column="25" lean-forward="true" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1545007825453" expanded="true" signature="167:9091" ph="..." />
+                <marker date="1546884489433" expanded="true" signature="167:9093" ph="..." />
               </folding>
             </state>
           </provider>
@@ -99,10 +98,10 @@
       <find>Num choices is not equal 1 !!</find>
       <find>self.weights</find>
       <find>self.verbose</find>
-      <find>num_of_choice_sets</find>
       <find>diff</find>
       <find>D</find>
       <find>beta</find>
+      <find>num_of_choice_sets</find>
     </findStrings>
     <replaceStrings>
       <replace>num_</replace>
@@ -121,8 +120,8 @@
         <option value="$PROJECT_DIR$/stew/example_data.py" />
         <option value="$PROJECT_DIR$/stew/main.py" />
         <option value="$PROJECT_DIR$/stew/mlogit_data.py" />
-        <option value="$PROJECT_DIR$/stew/mlogit.py" />
         <option value="$PROJECT_DIR$/stew/utils.py" />
+        <option value="$PROJECT_DIR$/stew/mlogit.py" />
       </list>
     </option>
   </component>
@@ -266,12 +265,12 @@
       <workItem from="1546213151386" duration="1785000" />
       <workItem from="1546603732016" duration="1184000" />
       <workItem from="1546801187333" duration="356000" />
-      <workItem from="1546861336140" duration="1257000" />
+      <workItem from="1546861336140" duration="1757000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25184000" />
+    <option name="totallyTimeSpent" value="25684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -288,11 +287,11 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3299363" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.19617835" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.32356688" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19617835" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32356688" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -400,11 +399,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+        <state relative-caret-position="365">
+          <caret line="45" column="25" lean-forward="true" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1545007825453" expanded="true" signature="167:9091" ph="..." />
+            <marker date="1546884489433" expanded="true" signature="167:9093" ph="..." />
           </folding>
         </state>
       </provider>
