@@ -21,7 +21,7 @@ def multi_class_error(predicted_choices, true_choices, num_choices=None):
     if num_choices is None:
         num_choices = np.sum(true_choices)
     if num_choices < 1.0:
-        print("Num choices is not equal 1 !!")
+        print("Num choices is not at least 1 !!")
         print(num_choices)
     return np.sum(predicted_choices != true_choices) / 2 / num_choices
 
@@ -38,4 +38,4 @@ def last_argmin(arr):
 
 @njit
 def last_argmax(arr):
-    return len(arr) - 1 - np.argmin(arr[::-1])
+    return len(arr) - 1 - np.argmax(arr[::-1])

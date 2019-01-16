@@ -8,7 +8,7 @@ from sklearn.model_selection import GroupKFold
 class StewMultinomialLogit:
     def __init__(self, num_features, lambda_min=-6.0, lambda_max=4.0, alpha=0.1,
                  D=None, method="BFGS", max_splits=10, num_lambdas=40,
-                 prior_weights=None, verbose=True):
+                 prior_weights=None, one_se_rule=False, verbose=True):
         if D is None:
             self.D = stew.utils.create_diff_matrix(num_features=num_features)
         else:
@@ -25,6 +25,7 @@ class StewMultinomialLogit:
         self.lambdas = np.insert(np.logspace(self.lambda_min, self.lambda_max, num=self.num_lambdas-1), 0, 0.0)
         self.verbose = verbose
         self.alpha = alpha
+        self.one_se_rule = one_se_rule
 
     def fit(self, data, lam, start_weights=None, standardize=False):
         if standardize:
@@ -96,6 +97,7 @@ class StewMultinomialLogit:
         num_splits = int(np.minimum(len(stew.utils.numba_unique(standardized_data[:, 0])), self.max_splits))
         kf = GroupKFold(n_splits=num_splits)
         lam_errors = np.full(shape=self.num_lambdas, fill_value=1.)
+        lam_sds = np.full(shape=self.num_lambdas, fill_value=0.)
         weights = np.zeros((self.num_lambdas, standardized_data.shape[1] - 2))
         lam_ix = 0
         converged = False
@@ -113,6 +115,7 @@ class StewMultinomialLogit:
                 choices_ix = self.predict(test_data, weights=cv_weights)
                 cv_errors[cv_ix] = stew.utils.multi_class_error(choices_ix, test_choices)
             lam_errors[lam_ix] = np.mean(cv_errors)
+            lam_sds[lam_ix] = np.std(cv_errors)
             # TODO: Put weight calculation outside of loop (only for lambda_min!!)
             weights[lam_ix, :] = self.fit(data=standardized_data, start_weights=self.start_weights, lam=lambda_ix, standardize=False)
             if np.std(weights[lam_ix, :]) < 0.0001:
@@ -136,12 +139,26 @@ class StewMultinomialLogit:
             self.lambdas = np.insert(np.logspace(self.lambda_min, self.lambda_max, num=self.num_lambdas - 1), 0, 0.0)
         if stop_index < self.num_lambdas:
             lam_errors = lam_errors[:stop_index]
+            lam_sds = lam_sds[:stop_index]
             weights = weights[:stop_index]
-        cv_min_ix = stew.utils.last_argmin(lam_errors)
-        cv_min_lambda = self.lambdas[cv_min_ix]
-        if self.verbose:
-            print("Lambda min index ", cv_min_ix, " out of ", self.num_lambdas, "lambdas.")  # is: ", cv_min_lambda, ". I
+        if self.one_se_rule:
+            cv_min_ix = stew.utils.last_argmin(lam_errors)
+            if self.verbose:
+                print("1SE RULE before : Lambda ", cv_min_ix, " out of ", stop_index, "lambdas.")  # is: ", cv_min_lambda, ". I
+            cv_min_error = lam_errors[cv_min_ix]
+            one_sd_error = cv_min_error + (lam_sds[cv_min_ix] / np.sqrt(num_splits))
+            smaller_than_one_sd = lam_errors < one_sd_error
+            cv_min_ix = stew.utils.last_argmax(smaller_than_one_sd)
+            cv_min_lambda = self.lambdas[cv_min_ix]
+            if self.verbose:
+                print("1SE RULE after : Lambda ", cv_min_ix, " out of ", stop_index, "lambdas.")  # is: ", cv_min_lambda, ". I
+        else:
+            cv_min_ix = stew.utils.last_argmin(lam_errors)
+            cv_min_lambda = self.lambdas[cv_min_ix]
+            if self.verbose:
+                print("Lambda min index ", cv_min_ix, " out of ", stop_index, "lambdas.")  # is: ", cv_min_lambda, ". I
             # print("Weights are: ", weights[cv_min_ix, :])
+
         cv_min_weights = weights[cv_min_ix]
         # print(cv_min_lambda)
         # if self.verbose:
