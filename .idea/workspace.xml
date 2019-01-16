@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81ef93ec-3842-4c53-a0fb-e5e734e2c326" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stew/mlogit.py" beforeDir="false" afterPath="$PROJECT_DIR$/stew/mlogit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stew/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/stew/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,11 +19,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="148" column="67" lean-forward="true" selection-start-line="148" selection-start-column="67" selection-end-line="148" selection-end-column="67" />
+            <state relative-caret-position="450">
+              <caret line="150" column="106" selection-start-line="150" selection-start-column="106" selection-end-line="150" selection-end-column="106" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1547638022430" expanded="true" signature="167:10101" ph="..." />
+                <marker date="1547662572060" expanded="true" signature="167:10159" ph="..." />
               </folding>
             </state>
           </provider>
@@ -104,6 +102,7 @@
       <find>D</find>
       <find>beta</find>
       <find>num_of_choice_sets</find>
+      <find>num_choices</find>
     </findStrings>
     <replaceStrings>
       <replace>num_</replace>
@@ -223,8 +222,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.utils" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.utils" />
     </list>
     <recent_temporary>
       <list>
@@ -256,17 +255,18 @@
       <workItem from="1547570839284" duration="70000" />
       <workItem from="1547634230093" duration="8000" />
       <workItem from="1547634636467" duration="1284000" />
-      <workItem from="1547635946769" duration="2649000" />
+      <workItem from="1547635946769" duration="3353000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38833000" />
+    <option name="totallyTimeSpent" value="39537000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16380544" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16380544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -280,7 +280,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3299363" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19617835" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19617835" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32356688" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -401,11 +401,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="148" column="67" lean-forward="true" selection-start-line="148" selection-start-column="67" selection-end-line="148" selection-end-column="67" />
+        <state relative-caret-position="450">
+          <caret line="150" column="106" selection-start-line="150" selection-start-column="106" selection-end-line="150" selection-end-column="106" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1547638022430" expanded="true" signature="167:10101" ph="..." />
+            <marker date="1547662572060" expanded="true" signature="167:10159" ph="..." />
           </folding>
         </state>
       </provider>
