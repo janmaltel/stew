@@ -148,7 +148,7 @@ class StewMultinomialLogit:
             if self.verbose:
                 print("1SE RULE before : Lambda ", cv_min_ix, " out of ", stop_index, "lambdas.")  # is: ", cv_min_lambda, ". I
             cv_min_error = lam_errors[cv_min_ix]
-            one_sd_error = cv_min_error + (lam_sds[cv_min_ix] / np.sqrt(num_choices)) # np.sqrt(num_splits)
+            one_sd_error = cv_min_error + (lam_sds[cv_min_ix] / num_choices) # np.sqrt(num_splits)
             smaller_than_one_sd = lam_errors < one_sd_error
             cv_min_ix = stew.utils.last_argmax(smaller_than_one_sd)
             cv_min_lambda = self.lambdas[cv_min_ix]
