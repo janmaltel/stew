@@ -6,7 +6,7 @@ import stew.utils as utils
 np.random.seed(5)
 
 num_features = 3
-num_choices = 5
+num_choices = 10
 max_cv_splits = 10
 num_lambdas = 30
 num_states = 1000
@@ -14,7 +14,8 @@ num_states = 1000
 data = create.discrete_choice_example_data(num_states=num_states, num_features=num_features, num_choices=num_choices,
                                            probabilistic=True)
 np.std(data, axis=0)
-mlog = mlogit.StewMultinomialLogit(num_features=num_features, max_splits=max_cv_splits, num_lambdas=num_lambdas)
+mlog = mlogit.StewMultinomialLogit(num_features=num_features, max_splits=max_cv_splits, num_lambdas=num_lambdas,
+                                   nonnegative=True)
 print(mlog.fit(data=data, lam=0, standardize=False))
 print(mlog.fit(data=data, lam=0, standardize=True))
 

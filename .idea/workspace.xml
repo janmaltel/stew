@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81ef93ec-3842-4c53-a0fb-e5e734e2c326" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/stew/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/stew/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stew/mlogit.py" beforeDir="false" afterPath="$PROJECT_DIR$/stew/mlogit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,18 +13,18 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/stew$utils.coverage" NAME="utils Coverage Results" MODIFIED="1538244509223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stew" />
-    <SUITE FILE_PATH="coverage/stew$main.coverage" NAME="main Coverage Results" MODIFIED="1547636507925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stew" />
+    <SUITE FILE_PATH="coverage/stew$main.coverage" NAME="main Coverage Results" MODIFIED="1547827102116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stew" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="138" column="45" lean-forward="true" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
+            <state relative-caret-position="364">
+              <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1547763250396" expanded="true" signature="167:10150" ph="..." />
+                <marker date="1547827099173" expanded="true" signature="167:10668" ph="..." />
               </folding>
             </state>
           </provider>
@@ -45,8 +46,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stew/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+            <state relative-caret-position="170">
+              <caret line="10" column="16" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stew/mlogit_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+            <state relative-caret-position="34">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -72,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stew/example_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="68">
+              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -103,6 +107,7 @@
       <find>beta</find>
       <find>num_of_choice_sets</find>
       <find>num_choices</find>
+      <find>optim</find>
     </findStrings>
     <replaceStrings>
       <replace>num_</replace>
@@ -119,15 +124,15 @@
         <option value="$PROJECT_DIR$/stew/regression.py" />
         <option value="$PROJECT_DIR$/stew/__init__.py" />
         <option value="$PROJECT_DIR$/stew/example_data.py" />
-        <option value="$PROJECT_DIR$/stew/main.py" />
         <option value="$PROJECT_DIR$/stew/mlogit_data.py" />
         <option value="$PROJECT_DIR$/stew/utils.py" />
+        <option value="$PROJECT_DIR$/stew/main.py" />
         <option value="$PROJECT_DIR$/stew/mlogit.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="275" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
   </component>
@@ -140,7 +145,22 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="stew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stew" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stew" type="462c0819:PsiDirectoryNode" />
+              <item name="stew" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -222,8 +242,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.utils" />
+      <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
@@ -255,12 +275,12 @@
       <workItem from="1547570839284" duration="70000" />
       <workItem from="1547634230093" duration="8000" />
       <workItem from="1547634636467" duration="1284000" />
-      <workItem from="1547635946769" duration="4717000" />
+      <workItem from="1547635946769" duration="8615000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40901000" />
+    <option name="totallyTimeSpent" value="44799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -272,7 +292,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32866243" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.37579617" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.37579617" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -280,7 +300,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3299363" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19617835" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.19617835" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32356688" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -294,6 +314,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/stew/mlogit.py</url>
+          <line>60</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -359,8 +386,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stew/example_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="68">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -369,8 +396,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stew/mlogit_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -378,13 +405,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="27" column="15" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stew/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -399,13 +419,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
+    <entry file="file://$PROJECT_DIR$/stew/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="138" column="45" lean-forward="true" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
+        <state relative-caret-position="170">
+          <caret line="10" column="16" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1547763250396" expanded="true" signature="167:10150" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stew/mlogit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1547827099173" expanded="true" signature="167:10668" ph="..." />
           </folding>
         </state>
       </provider>

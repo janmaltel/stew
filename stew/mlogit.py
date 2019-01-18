@@ -8,7 +8,7 @@ from sklearn.model_selection import GroupKFold
 class StewMultinomialLogit:
     def __init__(self, num_features, lambda_min=-6.0, lambda_max=4.0, alpha=0.1,
                  D=None, method="BFGS", max_splits=10, num_lambdas=40,
-                 prior_weights=None, one_se_rule=False, verbose=True):
+                 prior_weights=None, one_se_rule=False, verbose=True, nonnegative=False):
         if D is None:
             self.D = stew.utils.create_diff_matrix(num_features=num_features)
         else:
@@ -26,6 +26,10 @@ class StewMultinomialLogit:
         self.verbose = verbose
         self.alpha = alpha
         self.one_se_rule = one_se_rule
+        self.nonnegative = nonnegative
+        if self.nonnegative:
+            self.bounds = optim.Bounds(np.repeat(0, num_features), np.repeat(np.inf, num_features))
+            self.method = "L-BFGS-B"
 
     def fit(self, data, lam, start_weights=None, standardize=False):
         if standardize:
@@ -53,8 +57,13 @@ class StewMultinomialLogit:
                 standardized_data = standardized_data[:, :int(num_of_choice_sets + 1)]
                 start_weights = start_weights[:int(num_of_choice_sets - 1)]
 
-        op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
-                            args=(standardized_data, self.D, lam), jac=True, method=self.method)
+        if self.nonnegative:
+            op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
+                                args=(standardized_data, self.D, lam), jac=True, method=self.method,
+                                bounds=self.bounds)
+        else:
+            op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
+                                args=(standardized_data, self.D, lam), jac=True, method=self.method)
         weights = op.x
         if deleted_features:
             tmp_weights = np.zeros(num_of_parameters)
