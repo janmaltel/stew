@@ -5,6 +5,7 @@
       <w>logit</w>
       <w>mlogit</w>
       <w>multinomial</w>
+      <w>nonnegative</w>
       <w>probs</w>
       <w>stds</w>
     </words>

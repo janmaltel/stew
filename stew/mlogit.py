@@ -45,7 +45,7 @@ class StewMultinomialLogit:
 
         # For OLS, only estimate c-1 parameters, where c is the number of choice sets.
         deleted_features = False
-        if lam == 0:
+        if lam == 0 and not self.nonnegative:
             # Sum up choices to know how many choice sets there are.
             num_of_choice_sets = np.sum(standardized_data[:, 1])
             # print("num_of_choice_sets: ", num_of_choice_sets)
