@@ -1,0 +1,17 @@
+.DS_Store
+.idea/
+archive/
+venv
+_tmp/
+__pycache__/
+models/
+experiments/
+data/
+samples/
+rollout_sets/
+cmaesout*
+icml2019hierarchicalweights/
+concepts/
+literature/
+out_*
+plots/
