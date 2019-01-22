@@ -45,7 +45,7 @@ class StewMultinomialLogit:
 
         # For OLS, only estimate c-1 parameters, where c is the number of choice sets.
         deleted_features = False
-        if lam == 0 and not self.nonnegative:
+        if lam == 0:
             # Sum up choices to know how many choice sets there are.
             num_of_choice_sets = np.sum(standardized_data[:, 1])
             # print("num_of_choice_sets: ", num_of_choice_sets)
@@ -57,6 +57,7 @@ class StewMultinomialLogit:
                 standardized_data = standardized_data[:, :int(num_of_choice_sets + 1)]
                 start_weights = start_weights[:int(num_of_choice_sets - 1)]
 
+        self.bounds = optim.Bounds(np.repeat(0, len(start_weights)), np.repeat(np.inf, len(start_weights)))
         if self.nonnegative:
             op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
                                 args=(standardized_data, self.D, lam), jac=True, method=self.method,
