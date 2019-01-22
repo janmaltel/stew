@@ -57,7 +57,7 @@ class StewMultinomialLogit:
                 standardized_data = standardized_data[:, :int(num_of_choice_sets + 1)]
                 start_weights = start_weights[:int(num_of_choice_sets - 1)]
 
-        self.bounds = optim.Bounds(np.repeat(0, len(start_weights)), np.repeat(np.inf, len(start_weights)))
+        self.bounds = optim.Bounds(np.repeat(-1, len(start_weights)), np.repeat(np.inf, len(start_weights)))
         if self.nonnegative:
             op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
                                 args=(standardized_data, self.D, lam), jac=True, method=self.method,
