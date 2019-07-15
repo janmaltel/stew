@@ -28,7 +28,8 @@ class StewMultinomialLogit:
         self.one_se_rule = one_se_rule
         self.nonnegative = nonnegative
         if self.nonnegative:
-            self.bounds = optim.Bounds(np.repeat(0, num_features), np.repeat(np.inf, num_features))
+            self.bounds = optim.Bounds(np.repeat(-0.1, num_features), np.repeat(np.inf, num_features))
+            # self.bounds = optim.Bounds(np.repeat(0, num_features), np.repeat(np.inf, num_features))
             self.method = "L-BFGS-B"
 
     def fit(self, data, lam, start_weights=None, standardize=False):
@@ -45,7 +46,7 @@ class StewMultinomialLogit:
 
         # For OLS, only estimate c-1 parameters, where c is the number of choice sets.
         deleted_features = False
-        if lam == 0:
+        if lam == 0 and not self.nonnegative:
             # Sum up choices to know how many choice sets there are.
             num_of_choice_sets = np.sum(standardized_data[:, 1])
             # print("num_of_choice_sets: ", num_of_choice_sets)
@@ -57,7 +58,6 @@ class StewMultinomialLogit:
                 standardized_data = standardized_data[:, :int(num_of_choice_sets + 1)]
                 start_weights = start_weights[:int(num_of_choice_sets - 1)]
 
-        self.bounds = optim.Bounds(np.repeat(-0.01, len(start_weights)), np.repeat(np.inf, len(start_weights)))
         if self.nonnegative:
             op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
                                 args=(standardized_data, self.D, lam), jac=True, method=self.method,
@@ -77,8 +77,6 @@ class StewMultinomialLogit:
             print("stds_before_standardization are")
             print(stds_before_standardization)
             weights /= stds_before_standardization
-            # print("after re_standardizing weights")
-            # print(self.weights)
         return weights
 
     def predict(self, new_data, weights=None):
