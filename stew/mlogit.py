@@ -260,7 +260,7 @@ def stew_multinomial_logit_ll_and_grad(beta, data, D, lam):
     grad += np.sum((data[state_start_row_ix:, 1] - exp_utilities[state_start_row_ix:] / normalization_sum).reshape((-1, 1))
                    * data[state_start_row_ix:, 2:], axis=0)
     if lam > 0:
-        ll -= lam * beta.T.dot(D).dot(beta)
+        ll -= lam * beta.dot(D).dot(beta)
         grad -= 2 * lam * beta.dot(D)
     return -ll, -grad
 

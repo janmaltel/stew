@@ -10,13 +10,12 @@ def create_diff_matrix(num_features):
     return D
 
 
-@njit
 def create_stnw_matrix(num_features):
-    D = np.diag(np.full(shape = num_features, fill_value=5))
-    D[0, 0] = 1
-    D[num_features-1, num_features-1] = 4
-    np.fill_diagonal(D[1:], -2)
-    np.fill_diagonal(D[:, 1:], -2)
+    D = np.diag(np.full(shape=num_features, fill_value=5.0, dtype=np.float_))
+    D[0, 0] = 1.0
+    D[num_features-1, num_features-1] = 4.0
+    np.fill_diagonal(D[1:], -2.0)
+    np.fill_diagonal(D[:, 1:], -2.0)
     return D
 
 

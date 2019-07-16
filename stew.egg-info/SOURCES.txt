@@ -1,7 +1,9 @@
+setup.py
 stew/__init__.py
 stew/example_data.py
 stew/main.py
 stew/mlogit.py
+stew/mlogit_data.py
 stew/regression.py
 stew/speed_tests.py
 stew/utils.py
