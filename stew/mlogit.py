@@ -28,8 +28,8 @@ class StewMultinomialLogit:
         self.one_se_rule = one_se_rule
         self.nonnegative = nonnegative
         if self.nonnegative:
-            self.bounds = optim.Bounds(np.repeat(-0.1, num_features), np.repeat(np.inf, num_features))
-            # self.bounds = optim.Bounds(np.repeat(0, num_features), np.repeat(np.inf, num_features))
+            # self.bounds = optim.Bounds(np.repeat(-0.1, num_features), np.repeat(np.inf, num_features))
+            self.bounds = optim.Bounds(np.repeat(0, num_features), np.repeat(np.inf, num_features))
             self.method = "L-BFGS-B"
 
     def fit(self, data, lam, start_weights=None, standardize=False):
@@ -55,6 +55,7 @@ class StewMultinomialLogit:
             if diff >= 0:
                 deleted_features = True
                 # Only keep num_of_choice_sets - 1 predictors (+2 columns for choice set indicator and choice)
+                # Assumption is that
                 standardized_data = standardized_data[:, :int(num_of_choice_sets + 1)]
                 start_weights = start_weights[:int(num_of_choice_sets - 1)]
 
@@ -128,7 +129,7 @@ class StewMultinomialLogit:
             lam_sds[lam_ix] = np.std(cv_errors)
             # TODO: Put weight calculation outside of loop (only for lambda_min!!)
             weights[lam_ix, :] = self.fit(data=standardized_data, start_weights=self.start_weights, lam=lambda_ix, standardize=False)
-            if np.std(weights[lam_ix, :]) < 0.0001:
+            if np.std(weights[lam_ix, :]) < 0.00001:
                 # if self.verbose:
                 #     print("Converged at index ", lam_ix, " out of ", self.num_lambdas, "lambdas.")  # lambda: ", lambda_ix, ".
                 #     # print("Weights are: ", weights[lam_ix, :])
@@ -186,7 +187,7 @@ class StewMultinomialLogit:
         return cv_min_weights, cv_min_lambda
 
 
-@njit
+@njit(cache=False)
 def stew_multinomial_logit_predict(new_data, weights):
     utilities = new_data[:, 1:].dot(weights)
     old_state = new_data[0, 0]
@@ -202,7 +203,7 @@ def stew_multinomial_logit_predict(new_data, weights):
     return choices
 
 
-@njit
+@njit(cache=False)
 def stew_multinomial_logit_predicted_probabilities(new_data, weights):
     exp_utilities = np.exp(new_data[:, 1:].dot(weights))
     old_state = new_data[0, 0]
@@ -218,7 +219,7 @@ def stew_multinomial_logit_predicted_probabilities(new_data, weights):
     return probabilities
 
 
-@njit
+@njit(cache=False)
 def single_choice_set_grad(beta, data):
     grad = np.zeros(data.shape[1] - 2, dtype=np.float_)
     utilities = data[:, 2:].dot(beta)
@@ -230,11 +231,11 @@ def single_choice_set_grad(beta, data):
     return grad
 
 
-@njit
+@njit(cache=False)
 def stew_multinomial_logit_ll_and_grad(beta, data, D, lam):
     ll = 0.0
     grad = np.zeros(data.shape[1] - 2, dtype=np.float_)
-    utilities = data[:, 2:].dot(beta)
+    utilities = data[:, 2:].dot(np.ascontiguousarray(beta))
     utilities = utilities-np.max(utilities)
     exp_utilities = np.exp(utilities)
     normalization_sum = 0.0
