@@ -8,7 +8,7 @@ class ChoiceSetData:
 
     def __init__(self, num_features, max_choice_set_size):
         self.num_features = num_features
-        self.data = np.zeros((0, self.num_features + 2))
+        self.data = np.ascontiguousarray(np.zeros((0, self.num_features + 2)))
         self.choice_set_counter = 0.
         self.current_number_of_choice_sets = 0.
         self.max_choice_set_size = max_choice_set_size
@@ -31,6 +31,7 @@ class ChoiceSetData:
             self.data = self.data[ix:]
             if self.current_number_of_choice_sets > 0:
                 self.current_number_of_choice_sets -= 1.
+        self.data = np.ascontiguousarray(self.data)
 
     def sample(self):
         # Currently just returns entire data set.
