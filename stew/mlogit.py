@@ -3,11 +3,13 @@ from numba import njit
 import scipy.optimize as optim
 import stew.utils
 from sklearn.model_selection import GroupKFold
+import matplotlib.pyplot as plt
 
 
 class StewMultinomialLogit:
-    def __init__(self, num_features, lambda_min=-6.0, lambda_max=4.0, alpha=0.1,
+    def __init__(self, num_features, lambda_min=-6.0, lambda_max=6.0, alpha=0.1,
                  D=None, method="BFGS", max_splits=10, num_lambdas=40,
+                 last_argmin=True,
                  prior_weights=None, one_se_rule=False, verbose=True, nonnegative=False):
         if D is None:
             self.D = stew.utils.create_diff_matrix(num_features=num_features)
@@ -23,6 +25,7 @@ class StewMultinomialLogit:
         self.lambda_min = lambda_min
         self.lambda_max = lambda_max
         self.lambdas = np.insert(np.logspace(self.lambda_min, self.lambda_max, num=self.num_lambdas-1), 0, 0.0)
+        self.last_argmin = last_argmin
         self.verbose = verbose
         self.alpha = alpha
         self.one_se_rule = one_se_rule
@@ -45,19 +48,19 @@ class StewMultinomialLogit:
             start_weights = self.start_weights
 
         # For OLS, only estimate c-1 parameters, where c is the number of choice sets.
-        deleted_features = False
-        if lam == 0 and not self.nonnegative:
-            # Sum up choices to know how many choice sets there are.
-            num_of_choice_sets = np.sum(standardized_data[:, 1])
-            # print("num_of_choice_sets: ", num_of_choice_sets)
-            num_of_parameters = standardized_data.shape[1] - 2
-            diff = num_of_parameters - num_of_choice_sets
-            if diff >= 0:
-                deleted_features = True
-                # Only keep num_of_choice_sets - 1 predictors (+2 columns for choice set indicator and choice)
-                # Assumption is that
-                standardized_data = standardized_data[:, :int(num_of_choice_sets + 1)]
-                start_weights = start_weights[:int(num_of_choice_sets - 1)]
+        # deleted_features = False
+        # if lam == 0 and not self.nonnegative:
+        #     # Sum up choices to know how many choice sets there are.
+        #     num_of_choice_sets = np.sum(standardized_data[:, 1])
+        #     # print("num_of_choice_sets: ", num_of_choice_sets)
+        #     num_of_parameters = standardized_data.shape[1] - 2
+        #     diff = num_of_parameters - num_of_choice_sets
+        #     if diff >= 0:
+        #         deleted_features = True
+        #         # Only keep num_of_choice_sets - 1 predictors (+2 columns for choice set indicator and choice)
+        #         # Assumption is that
+        #         standardized_data = standardized_data[:, :int(num_of_choice_sets + 1)]
+        #         start_weights = start_weights[:int(num_of_choice_sets - 1)]
 
         if self.nonnegative:
             op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
@@ -67,10 +70,10 @@ class StewMultinomialLogit:
             op = optim.minimize(fun=stew_multinomial_logit_ll_and_grad, x0=start_weights,
                                 args=(standardized_data, self.D, lam), jac=True, method=self.method)
         weights = op.x
-        if deleted_features:
-            tmp_weights = np.zeros(num_of_parameters)
-            tmp_weights[:len(weights)] = weights
-            weights = tmp_weights
+        # if deleted_features:
+        #     tmp_weights = np.zeros(num_of_parameters)
+        #     tmp_weights[:len(weights)] = weights
+        #     weights = tmp_weights
 
         if standardize:
             print("before re_standardizing weights")
@@ -104,6 +107,9 @@ class StewMultinomialLogit:
         else:
             standardized_data = data
 
+        # For numba...
+        standardized_data = np.ascontiguousarray(standardized_data)
+
         num_choices = len(stew.utils.numba_unique(standardized_data[:, 0]))
         num_splits = int(np.minimum(num_choices, self.max_splits))
         kf = GroupKFold(n_splits=num_splits)
@@ -127,7 +133,6 @@ class StewMultinomialLogit:
                 cv_errors[cv_ix] = stew.utils.multi_class_error(choices_ix, test_choices)
             lam_errors[lam_ix] = np.mean(cv_errors)
             lam_sds[lam_ix] = np.std(cv_errors)
-            # TODO: Put weight calculation outside of loop (only for lambda_min!!)
             weights[lam_ix, :] = self.fit(data=standardized_data, start_weights=self.start_weights, lam=lambda_ix, standardize=False)
             if np.std(weights[lam_ix, :]) < 0.00001:
                 # if self.verbose:
@@ -139,21 +144,24 @@ class StewMultinomialLogit:
         # Data set is growing with time, so the other direction is not needed
         # TODO: include number of samples in lambda calculation
         if np.linalg.norm(weights[0, :] - weights[1, :]) < 0.0001:
-            print("Warning: the first lambda results in weights equal to lam = 0. "
-                  "lambda_min is increased.")
             self.lambda_min += 0.2
+            print("Warning: the first lambda results in weights equal to lam = 0. "
+                  "lambda_min is increased. New lambda_min is", self.lambda_min)
             self.lambdas = np.insert(np.logspace(self.lambda_min, self.lambda_max, num=self.num_lambdas - 1), 0, 0.0)
         if lam_ix == self.num_lambdas:
-            print("Warning: lambda grid search did not converge to equal weights. "
-                  "lambda_max is increased.")
             self.lambda_max += 0.2
+            print("Warning: lambda grid search did not converge to equal weights. "
+                  "lambda_max is increased. New lambda_max is", self.lambda_max)
             self.lambdas = np.insert(np.logspace(self.lambda_min, self.lambda_max, num=self.num_lambdas - 1), 0, 0.0)
         if stop_index < self.num_lambdas:
             lam_errors = lam_errors[:stop_index]
             lam_sds = lam_sds[:stop_index]
             weights = weights[:stop_index]
         if self.one_se_rule:
-            cv_min_ix = stew.utils.last_argmin(lam_errors)
+            if self.last_argmin:
+                cv_min_ix = stew.utils.last_argmin(lam_errors)
+            else:
+                cv_min_ix = np.argmin(lam_errors)
             if self.verbose:
                 print("1SE RULE before : Lambda ", cv_min_ix, " out of ", stop_index, "lambdas.")  # is: ", cv_min_lambda, ". I
             cv_min_error = lam_errors[cv_min_ix]
@@ -164,32 +172,34 @@ class StewMultinomialLogit:
             if self.verbose:
                 print("1SE RULE after : Lambda ", cv_min_ix, " out of ", stop_index, "lambdas.")  # is: ", cv_min_lambda, ". I
         else:
-            cv_min_ix = stew.utils.last_argmin(lam_errors)
+            if self.last_argmin:
+                cv_min_ix = stew.utils.last_argmin(lam_errors)
+            else:
+                cv_min_ix = np.argmin(lam_errors)
             cv_min_lambda = self.lambdas[cv_min_ix]
             if self.verbose:
                 print("Lambda min index ", cv_min_ix, " out of ", stop_index, "lambdas.")  # is: ", cv_min_lambda, ". I
-            # print("Weights are: ", weights[cv_min_ix, :])
+                # # This is to plot error as function of regularization strnegth
+                # fig1, ax1 = plt.subplots()
+                # ax1.plot(self.lambdas[:stop_index], lam_errors, label="cv_errors")
+                # plt.axvline(x=cv_min_lambda)
+                # plt.semilogx(nonposx="clip")
+                # plt.title('CV error as function of reg strength')
+                # plt.xlabel('lambda')
+                # plt.ylabel('CV error')
+                # plt.legend()
+                # plt.show()
 
         cv_min_weights = weights[cv_min_ix]
-        # print(cv_min_lambda)
-        # if self.verbose:
-        #     print("lam_errors")
-        #     print(lam_errors)
-        #     print("weights")
-        #     print(weights)
+
         if standardize:
-            # if self.verbose:
-            #     print("before re_standardizing weights")
-            #     print(cv_min_weights)
-            #     print("stds_before_standardization are")
-            #     print(stds_before_standardization)
             cv_min_weights /= stds_before_standardization
         return cv_min_weights, cv_min_lambda
 
 
 @njit(cache=False)
 def stew_multinomial_logit_predict(new_data, weights):
-    utilities = new_data[:, 1:].dot(weights)
+    utilities = np.ascontiguousarray(new_data[:, 1:]).dot(weights)
     old_state = new_data[0, 0]
     state_start_row_ix = 0
     choices = np.zeros(len(new_data), np.float_)
@@ -235,7 +245,7 @@ def single_choice_set_grad(beta, data):
 def stew_multinomial_logit_ll_and_grad(beta, data, D, lam):
     ll = 0.0
     grad = np.zeros(data.shape[1] - 2, dtype=np.float_)
-    utilities = data[:, 2:].dot(np.ascontiguousarray(beta))
+    utilities = np.ascontiguousarray(data[:, 2:]).dot(beta)
     utilities = utilities-np.max(utilities)
     exp_utilities = np.exp(utilities)
     normalization_sum = 0.0
@@ -244,6 +254,8 @@ def stew_multinomial_logit_ll_and_grad(beta, data, D, lam):
     for row_ix in range(data.shape[0]):
         state = data[row_ix, 0]
         if old_state != state:
+            # if normalization_sum == 0:
+            #     print("is zero...")
             ll -= np.log(normalization_sum)
             # if normalization_sum > 1000000:
             #     print(normalization_sum)
@@ -257,6 +269,8 @@ def stew_multinomial_logit_ll_and_grad(beta, data, D, lam):
         if choice == 1.0:
             ll += utilities[row_ix]
         old_state = state
+    # if normalization_sum == 0:
+    #     print("is zero...")
     ll -= np.log(normalization_sum)
     grad += np.sum((data[state_start_row_ix:, 1] - exp_utilities[state_start_row_ix:] / normalization_sum).reshape((-1, 1))
                    * data[state_start_row_ix:, 2:], axis=0)

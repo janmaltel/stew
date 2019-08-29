@@ -2,8 +2,12 @@ import numpy as np
 import stew.utils
 
 
-def discrete_choice_example_data(num_states=100, num_choices=5, num_features=3, probabilistic=True):
+def discrete_choice_example_data(num_states=100, num_choices=5, num_features=3,
+                                 probabilistic=True,
+                                 directed_beta=False):
     beta = np.random.normal(loc=0, scale=9, size=num_features)
+    if directed_beta:
+        beta = np.abs(beta)
     print("True beta", beta)
     features = np.random.normal(loc=0, scale=1, size=(num_states*num_choices, num_features)) * 2 ** np.arange(num_features)
     utilities = features.dot(beta)
