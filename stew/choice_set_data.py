@@ -39,6 +39,8 @@ class ChoiceSetData:
 
     def delete_data(self):
         self.data = np.zeros((0, self.num_features + 2))
+        self.current_number_of_choice_sets = 0
+        self.choice_set_counter = 0
 
 
 
