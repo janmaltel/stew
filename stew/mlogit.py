@@ -8,8 +8,7 @@ import matplotlib.pyplot as plt
 
 class StewMultinomialLogit:
     def __init__(self, num_features, lambda_min=-6.0, lambda_max=6.0, alpha=0.1,
-                 D=None, method="BFGS", max_splits=10, num_lambdas=40,
-                 last_argmin=True,
+                 D=None, method="BFGS", max_splits=10, num_lambdas=40, last_argmin=True,
                  prior_weights=None, one_se_rule=False, verbose=True, nonnegative=False):
         if D is None:
             self.D = stew.utils.create_diff_matrix(num_features=num_features)
