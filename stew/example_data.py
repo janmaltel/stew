@@ -33,10 +33,25 @@ def discrete_choice_example_data(num_states=100, num_choices=5, num_features=3,
     return data
 
 
-def regression_example_data(num_samples=100, num_features=3):
-    D = stew.utils.create_diff_matrix(num_features)
+def regression_example_data(num_samples=100,
+                            num_features=3,
+                            noise_scale=0.1,
+                            beta=None,
+                            return_beta=False):
+    # D = stew.utils.create_diff_matrix(num_features)
     X = np.random.normal(size=(num_samples, num_features))
-    true_beta = np.random.normal(size=num_features)
-    eps = np.random.normal(loc=0, scale=0.1, size=num_samples)
-    y = true_beta.T.dot(X.T) + eps
-    return X, y
+    if beta is None:
+        beta = np.random.normal(size=num_features)
+    print("True feature weights are: ", beta)
+    eps = np.random.normal(loc=0, scale=noise_scale, size=num_samples)
+    y = beta.T.dot(X.T) + eps
+    if return_beta:
+        return X, y, beta
+    else:
+        return X, y
+
+
+# regression_example_data(10, 3, 0.1, beta=np.array([-2, 2, 2]))
+
+
+
